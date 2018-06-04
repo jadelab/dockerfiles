@@ -1,0 +1,14 @@
+# escape=`
+
+FROM microsoft/windowsservercore:1803
+
+# Download and install Build Tools for C++ builds
+ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\TEMP\vs_buildtools.exe
+RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
+   --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended
+	
+# Start developer command prompt with any other commands specified.
+ENTRYPOINT C:\BuildTools\Common7\Tools\VsDevCmd.bat &&
+
+# Default to PowerShell if no other command specified.
+CMD ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]

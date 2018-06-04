@@ -1,0 +1,6 @@
+image: Visual Studio 2017
+
+build_script:
+- docker build -t buildtools ./buildtools
+
+test: off
